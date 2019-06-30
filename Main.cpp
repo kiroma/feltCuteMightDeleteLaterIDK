@@ -7,11 +7,9 @@
 int main() {
 	sf::Texture texture;
 
-	Invaders* invader;
-
 	texture.loadFromFile("images/SIInvader2.png");
-	invader = new Invaders(&texture, sf::Vector2<unsigned>(1, 2), 0.3, 2.0f);
-	invader->setPosition(sf::Vector2<float>(100, 100));
+	Invaders invader(&texture, sf::Vector2<unsigned>(2, 1), 0.3, 2.0f);
+	invader.setPosition(sf::Vector2<float>(100, 100));
 
 	sf::RenderWindow window;
 	sf::Event sfEvent;
@@ -25,35 +23,24 @@ int main() {
 				case sf::Event::Closed:
 					window.close();
 					break;
+				default:
+					break;
 			}
 		}
 
 		sf::Vector2<float> movement(0.f, 0.f);
 		unsigned int speed = 5;
 
-		bool isMovingLeft = false;
-		bool isMovingRight = false;
-
-		if (invader->isTouchingLeft() == true)  { movement.x += speed; bool isMovingLeft = false; bool isMovingRight = true; }
-		if (invader->isTouchingRight() == true) { movement.x -= speed; bool isMovingLeft = true; bool isMovingRight = false; }
-
-		else if (invader->isTouchingLeft() == false && invader->isTouchingRight() == false){
-			if (isMovingRight == true) { movement.x += speed; }
-			if (isMovingLeft == true)  { movement.x -= speed; }
-		}
-
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { movement.x -= speed; }
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { movement.x += speed; }
 
-		invader->move(movement);
-
-
+		invader.move(movement);
+		invader.update();
 
 		window.clear();
 		
 		//Render items
-		invader->renderTo(window);
-
+		invader.renderTo(window);
 
 		window.display();
 	}

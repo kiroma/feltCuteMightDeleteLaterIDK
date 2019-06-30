@@ -1,13 +1,8 @@
 #include "Invaders.h"
 
 
-Invaders::Invaders(sf::Texture* texture, sf::Vector2<unsigned> imageCount, float switchTime, float speed)
-	: animation(texture, imageCount, switchTime) {
-
-	this->speed = speed;
-	row = 0;
-	isFacingRight = true;
-
+Invaders::Invaders(sf::Texture* texture, const sf::Vector2<unsigned> &imageCount, float switchTime, float speed)
+	: animation(texture, imageCount, switchTime), speed(speed) {
 	invader.setTexture(*texture);
 }
 
@@ -15,12 +10,8 @@ void Invaders::setPosition(sf::Vector2<float> newPos) {
 	invader.setPosition(newPos);
 }
 
-void Invaders::update(float dt) {
-	if (isTouchingLeft() == true)  {}
-	if (isTouchingRight() == true) {}
-	 
-
-	animation.update(row, dt, isFacingRight);
+void Invaders::update() {
+	animation.update();
 	invader.setTextureRect(animation.uvRect);
 }
 
