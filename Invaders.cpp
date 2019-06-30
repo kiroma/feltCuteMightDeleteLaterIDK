@@ -38,6 +38,6 @@ bool Invaders::isTouchingLeft() {
 }
 
 bool Invaders::isTouchingRight() {
-	if (invader.getPosition().x <= SCREEN_WIDTH) { return true; }
+	if (invader.getPosition().x >= SCREEN_WIDTH) { return true; }
 	return false;
 }

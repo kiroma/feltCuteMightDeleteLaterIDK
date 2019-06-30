@@ -34,6 +34,14 @@ int main() {
 		bool isMovingLeft = false;
 		bool isMovingRight = false;
 
+		if (invader->isTouchingLeft() == true)  { movement.x += speed; bool isMovingLeft = false; bool isMovingRight = true; }
+		if (invader->isTouchingRight() == true) { movement.x -= speed; bool isMovingLeft = true; bool isMovingRight = false; }
+
+		else if (invader->isTouchingLeft() == false && invader->isTouchingRight() == false){
+			if (isMovingRight == true) { movement.x += speed; }
+			if (isMovingLeft == true)  { movement.x -= speed; }
+		}
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { movement.x -= speed; }
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { movement.x += speed; }
 
