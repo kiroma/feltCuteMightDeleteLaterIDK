@@ -7,10 +7,19 @@
 
 class Animation {
 	public:
+		enum Direction
+		{
+			up = 0,
+			left = 1,
+			down = 2,
+			right = 3
+		};
 		Animation(sf::Texture* texture, const sf::Vector2u &imageCount, float switchTime);
 		
 		void update();
 		sf::IntRect uvRect;
+		bool isMoving = false;
+		Direction direction = up;
 
 	private:
 		const sf::Vector2u imageCount;

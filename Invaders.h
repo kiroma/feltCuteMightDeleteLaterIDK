@@ -18,6 +18,16 @@ class Invaders {
 
 		bool isTouchingLeft();
 		bool isTouchingRight();
+		bool isTouchingUp();
+		bool isTouchingDown();
+		void setMoving(const bool &moving)
+		{
+			animation.isMoving = moving;
+		}
+		void setDirection(const Animation::Direction &dir)
+		{
+			animation.direction = dir;
+		}
 
 	private:
 		sf::Sprite invader;
@@ -25,6 +35,5 @@ class Invaders {
 		Animation animation;
 		unsigned int row = 0;
 		float speed;
-		bool isFacingRight;
 };
 

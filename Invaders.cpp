@@ -24,11 +24,21 @@ void Invaders::renderTo(sf::RenderWindow& window) {
 }
 
 bool Invaders::isTouchingLeft() {
-	if (invader.getPosition().x <= SCREEN_WIDTH * 0) { return true; }
+	if (invader.getPosition().x <= 0) { return true; }
 	return false;
 }
 
 bool Invaders::isTouchingRight() {
-	if (invader.getPosition().x >= SCREEN_WIDTH) { return true; }
+	if (invader.getPosition().x >= (SCREEN_WIDTH - animation.uvRect.width)) { return true; }
+	return false;
+}
+
+bool Invaders::isTouchingUp() {
+	if (invader.getPosition().y <= 0) { return true; }
+	return false;
+}
+
+bool Invaders::isTouchingDown() {
+	if (invader.getPosition().y >= (SCREEN_HEIGHT - animation.uvRect.height)) { return true; }
 	return false;
 }

@@ -8,12 +8,22 @@ Animation::Animation(sf::Texture* texture, const sf::Vector2u &imageCount, float
 }
 
 void Animation::update() {
-	if(elapsed() > switchTime)
+	currentImage.y = direction;
+	if(isMoving)
 	{
-		tp = std::chrono::steady_clock::now();
-		currentImage.x++;
+		if(elapsed() > switchTime)
+		{
+			tp = std::chrono::steady_clock::now();
+			currentImage.x++;
 
-		if (currentImage.x >= imageCount.x) { currentImage.x = 0; }
+			if (currentImage.x >= imageCount.x) { currentImage.x = 1; }
+			uvRect.top = currentImage.y * uvRect.height;
+			uvRect.left = currentImage.x * uvRect.width;
+		}
+	}
+	else
+	{
+		currentImage.x = 0;
 		uvRect.top = currentImage.y * uvRect.height;
 		uvRect.left = currentImage.x * uvRect.width;
 	}

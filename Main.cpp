@@ -7,8 +7,8 @@
 int main() {
 	sf::Texture texture;
 
-	texture.loadFromFile("images/SIInvader2.png");
-	Invaders invader(&texture, sf::Vector2<unsigned>(2, 1), 0.3, 2.0f);
+	texture.loadFromFile("images/skeletons.png");
+	Invaders invader(&texture, sf::Vector2<unsigned>(9, 4), 0.1, 2.0f);
 	invader.setPosition(sf::Vector2<float>(100, 100));
 
 	sf::RenderWindow window;
@@ -29,11 +29,15 @@ int main() {
 		}
 
 		sf::Vector2<float> movement(0.f, 0.f);
-		unsigned int speed = 5;
+		unsigned int speed = 2;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { movement.x -= speed; }
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { movement.x += speed; }
+		bool moving = false;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !invader.isTouchingLeft()) { movement.x -= speed; invader.setDirection(Animation::Direction::left); moving = true; }
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !invader.isTouchingRight()) { movement.x += speed; invader.setDirection(Animation::Direction::right); moving = true; }
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !invader.isTouchingUp()) { movement.y -= speed; invader.setDirection(Animation::Direction::up); moving = true; }
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !invader.isTouchingDown()) { movement.y += speed; invader.setDirection(Animation::Direction::down); moving = true; }
 
+		invader.setMoving(moving);
 		invader.move(movement);
 		invader.update();
 
